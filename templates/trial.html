@@ -1,0 +1,115 @@
+<!-- this is modeled after Jess Hamrick's experiment. Each one of these Divs (except the last)
+contains instructions for each phase of the task, and are called to show by the Instructions() function
+at the very bottom is the HTML that is operated on for the actual tasks -->
+
+<div class="slide" id="instruct-practice">
+  <h1>Task Instructions</h1>
+  <div class="blue">
+	<p> The purpose of each of these tasks is for you to generate as many ideas as you can in the time allotted, but also to be as creative as possible when generating each idea</p>
+
+    <p>Before you start the creative thinking part, you will practice using the keyboard and text entry
+      system.</p>
+
+      <p>When you press "Start", the name of a specific category will appear on the screen.</p>
+
+      <p> As soon as you think of an example of that category, type it into the field and press ENTER.</p>
+	<p> It is important to keep thinking of responses and to type them in for the entire time</p>
+	<p>Please type them in <b> one at a time</b> as they come to you, and <b>press enter after entering each one.</b></p>
+	<p>Pressing enter will clear the response field so that you can type in the additional ideas that come to you</p>
+        <p> When the 30 seconds are over, you will recieve instructions about the first real
+          experimental trial. </p>
+    </div>
+
+      <div class="continue">
+        <button type="button" class="next">Start</button>
+      </div>
+    </div>
+
+<div class="slide" id="instruct-ou">
+      <h1>Task Instructions</h1>
+      <div class="blue">
+        <p> In the next set of tasks, the goal is to think of uses for objects.<b> Please be as
+      creative as you like.</b></p>
+
+      <p>When you press Start, the name of a that object will appear on the screen.</p>
+
+      <p>As before, as soon as you think of something, type it into the field and press ENTER.</p>
+	 <p>Do this as many times as you can in 3 minutes.</p>
+
+      <p>After 3 minutes on one category, the prompt will change to a new category, and
+      after the next 3 minutes a third category will appear. This phase will last 9 minutes.</p>
+	<p>Remember,it is important to try to  keep thinking of responses and to type them in for the entire time for each prompt</p> 
+        <p>Please type them in <b> one at a time</b> as they come to you, and <b>press enter after entering each one.</b></p>
+        <p>Pressing enter will clear the response field so that you can type in the additional ideas that come to you</p>
+
+    </div>
+    <div class="question">
+      <p>Press continue when you are ready. If you would like to take a short break you may do so now, but remember that your HIT will expire after 60 minutes</p>
+    </div>
+
+      <div class="continue">
+        <button type="button" class="next">Start</button>
+      </div>
+    </div>
+
+<!-- If wanting to use a "semantic memory recall" task here's some generic instructions
+<div class="slide" id="instruct-sf">
+          <h1>Instructions (continued)</h1>
+          <div class="blue">
+    <p> In this block of trials, you will have 3 minutes to name as many members of a particular
+      category as you can.</p>
+
+    <p>When you press Start, the name of a specific category will appear on the screen
+      and you are to type in as many examples of that category as you can as soon as you think
+      of them.</p>
+
+      <p> After 3 minutes on one category, the prompt will change to a new category, and
+        after the next 3 minutes a third category will appear. This phase will last 9 minutes.</p>
+
+      <p>Remember, it is important to type as soon as you think of something.</p>
+    </div>
+
+      <div class="continue">
+        <button type="button" class="next">Start</button>
+      </div>
+    </div> -->
+
+    <div class="slide" id="instruct-consq">
+              <h1>Task Instructions</h1>
+              <div class="blue">
+         <p> In this block of trials, a statement will appear on the screen. The statement might be something like "imagine that humans walked with their hands."</p>
+	<p> For 3 minutes, try to think of any and all consequences that might result from the statement.<b>Please be as creative as you like.</b></p>
+
+          <p>When you press Start, the statement will appear on the screen for you to read.</p>
+	<p>As before, as soon as you think of something, type it into the field and press ENTER.</p>
+         <p>Do this as many times as you can in 3 minutes.</p>
+
+      <p> After 3 minutes on a prompt, the prompt will change to a new statement about consequences, and then it will change again to a third. This phase will last 9 minutes.</p>
+        <p>Remember,it is important to try to keep thinking of responses and to type them in for the entire time for each prompt</p>
+        <p>Please type them in <b> one at a time</b> as they come to you, and <b>press enter after entering each one.</b></p>
+        <p>Pressing enter will clear the response field so that you can type in the additional ideas that come to you</p>
+
+        </div>
+        <div class="question">
+          <p>Press continue when you are ready. If you would like to take a short break you may do so now, but remember your HIT will expire after 60 minutes.</p>
+        </div>
+          <div class="continue">
+            <button type="button" class="next">Start</button>
+          </div>
+        </div>
+
+<!-- this is the holder for the actual response phase-->
+<div class="slide" id="trial">
+  <!-- prompt box -->
+  <div id="entry" class="blue">
+    <div id="prompt-show" class="phase">
+      <div class="spacer"></div>
+    </div>
+    <!-- response entry field -->
+    <div id="resp-entry" class="phase">
+        <div class="spacer"></div>
+        <label for="resp-input">Type Each  Responses Here.<br> Press ENTER after EACH response.</label>
+          <input id="resp-input" type="text">
+        </div>
+      </div>
+</div>

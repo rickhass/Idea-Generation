@@ -1,0 +1,40 @@
+[HIT Configuration]
+title = Participate in a creative thinking experiment (30 min)
+description = Complete 6 short tasks in which you respond with creative ideas for uses of objects and consequences of different events.
+
+amt_keywords = Memory, Psychology, Creativity
+lifetime = 24
+us_only = true
+approve_requirement = 85
+contact_email_on_error = youremail@someuni.edu
+ad_group = CIG
+psiturk_keywords = divergent thinking, creativity, memory
+organization_name = Your University
+browser_exclude_rule = MSIE, mobile, tablet
+allow_repeats = false
+
+[Database Parameters]
+database_url = sqlite:///participants.db
+table_name = cig_data
+
+[Server Parameters]
+host = localhost
+port = 22362
+cutoff_time = 60
+logfile = server.log
+loglevel = 2
+debug = false
+login_username = 
+login_pw = 
+threads = auto
+
+
+[Task Parameters]
+experiment_code_version = 1.0
+num_conds = 1
+num_counters = 1
+
+[Shell Parameters]
+launch_in_sandbox_mode = true
+use_psiturk_ad_server = true
+ad_location = false
