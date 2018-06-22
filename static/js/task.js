@@ -3,7 +3,7 @@
  */
 
 // new configuration object
-var $c = new CIGconfig(condition, counterbalance, 180000); // 180000ms = 3 min
+var $c = new CIGconfig(condition, counterbalance, 5000); // 180000ms = 3 min
 
 // new psiturk object
 var psiTurk = new PsiTurk(uniqueId, adServerLoc);
@@ -21,7 +21,7 @@ var STATE;
 
 /******
 *
-* Handle the experiment including the task instruction pages (other instructions
+* Handle the experiment including the task instruction pages (overall instructions pages are handled differently)
 
 ******/
 var Instructions = function() {
@@ -88,7 +88,7 @@ var Instructions = function() {
         CURRENTVIEW = new Trial();
     };
 
-    // Display the first page of instructions
+    // Display the block instructions
     this.show();
 };
 
@@ -106,6 +106,8 @@ var Trial = function() {
     this.firstListen = false;
     // Whether the object is listening for the entry of a final response
     this.listening = false;
+    // Whether the last page listens for the spacebar
+    this.lastlisten = false;
 
     // List of trials / prompts in this block of the experiment
     this.trials = $c.promptlist[STATE.experiment_phase];
@@ -162,7 +164,9 @@ var Trial = function() {
             entryDiv.style.display = 'block';
 
             show_children(entryDiv);
+
             show_prompt(that.trialinfo);
+            
             // Listening for responses
             that.firstListen = true;
             that.listening = true;
@@ -176,7 +180,7 @@ var Trial = function() {
         debug("responding");
         $("#resp-input").show();
         $("#resp-entry").show();
-        $("#resp-input").focus();
+        $("#resp-input").focus(); // give focus to the input field
 
         if (STATE.experiment_phase === 0){ // i.e. we're practing
           var t = 30000; // 30 seconds for practice trial
@@ -187,32 +191,36 @@ var Trial = function() {
           STATE.set_trial_phase(STATE.trial_phase + 1);
           that.show();
         }, t); // keep responding until time expires
-  };
+      };
 
-    // Phase 3: turn prompt and responding off and go back to initialize
+    // Phase 3: turn prompt and responding off and wait for keypress (keyup) to begin next prompt
     this.phases[TRIAL.promptoff] = function(that) {
-        //clear_prompt_field(); // clears the prompt node, or else the next round just adds to it
-        if (STATE.index >= (that.trials.length - 1)){ // has to do this or else it won't advance
-          replace_prompt("Good work! The next task is loading. You will have an oportunity for a short break!");
+
+        if (STATE.index >= (that.trials.length - 1)){
+          replace_prompt("Good work! This part of the experiment is over, you can take a short break before you move on. Press the SPACEBAR to continue.");
         }
         else {
-          replace_prompt("Good work! The next prompt will load in 5 seconds.");
+          replace_prompt("Good work! Press the SPACEBAR move on to the next prompt in this block. Be ready to type right away!");
         }
-
-        $("#resp-input").val(""); // clear the input field so it doesn't carry over to next prompt
+        
         $("#resp-entry").hide(); // hide the response entry div
         that.listening = false;
         that.firstListen = false;
+        that.lastlisten = true; // pay attention to space bar only here
 
-
-        setTimeout(function () {
-          STATE.set_trial_phase();
-          STATE.set_index(STATE.index + 1);
-          that.show();
-        }, $c.rest);
-      };
+        document.onkeyup = function () { // this is super annoying, but it works
+            if(that.lastlisten){
+                $("#resp-input").val(""); // clear input field so it doesn't carry over
+                that.lastlisten = false; // don't trigger keyup until next prompt
+                STATE.set_trial_phase();
+                STATE.set_index(STATE.index + 1);
+                that.show();
+            }
+        };
+    };
 
     // Show the current trial at the correct phase
+
     this.show = function () {
         // Update the URL hash
         STATE.set_hash();
@@ -260,7 +268,7 @@ var Trial = function() {
 
     // Complete the set of trials in the test phase
     this.finish = function() {
-        debug("Finish block" + STATE.experiment_phase);
+        debug("Finish block " + STATE.experiment_phase);
         psiTurk.recordTrialData()
         // Reset the state object for the next experiment phase
 	      STATE.set_experiment_phase(STATE.experiment_phase + 1);
