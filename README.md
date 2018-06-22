@@ -1,4 +1,6 @@
 # Idea-Generation
+# # Updated 6.22.18 with new flow-control. Participants now control their own flow through the prompts with the SPACEBAR. Avoids issues with lapses in attention, and ensures RTs will be valid from start of prompt.
+
 This is the code for reproducing and potentially creating your own idea generation / divergent thinking / creative thinking experiment.
 The JavaScript functions were created following Jess Hamrick's Mental Rotation Experiment, which makes use of STATE and EXPERIMENT objects to enable control of iterations / trials. 
 
