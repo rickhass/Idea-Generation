@@ -206,9 +206,11 @@ var Trial = function() {
         $("#resp-entry").hide(); // hide the response entry div
         that.listening = false;
         that.firstListen = false;
-        that.lastlisten = true; // pay attention to space bar only here
-
-        document.onkeyup = function () { // this is super annoying, but it works
+        setTimeout(function () {
+            that.lastlisten = true; // activate the keyup function after 800 ms to avoid carryover
+        }, 800);
+        
+        document.onkeyup = function () { // this is a simple way to use a keyup to advance (keyup is best here)
             if(that.lastlisten){
                 $("#resp-input").val(""); // clear input field so it doesn't carry over
                 that.lastlisten = false; // don't trigger keyup until next prompt
